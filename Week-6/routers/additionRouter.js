@@ -1,26 +1,41 @@
 const express = require('express');
-const router = express.Router();
+const { storeAddition, getAdditions } = require('../model/additionModel'); // Import the database functions
+const router = express.Router(); // Initialize the router
 
-// Example of storing and retrieving past additions (You should implement this with a database)
-let pastAdditions = [];
+// Route to handle the addition of two numbers and store the result in the database
+router.post('/addition', async (req, res) => {
+    const { number1, number2 } = req.body; // Extract numbers from the request body
 
-router.post('/addition', (req, res) => {
-    const { number1, number2 } = req.body;
-    const firstNumber = parseFloat(number1);
-    const secondNumber = parseFloat(number2);
-
-    if (isNaN(firstNumber) || isNaN(secondNumber)) {
-        return res.status(400).json({ result: null, statusCode: 400 });
+    // Validate the input to ensure they are numbers
+    if (isNaN(parseFloat(number1)) || isNaN(parseFloat(number2))) {
+        return res.status(400).json({ result: null, statusCode: 400 }); // Return an error for invalid input
     }
 
-    const result = firstNumber + secondNumber;
-    pastAdditions.push({ number1: firstNumber, number2: secondNumber, result });
+    // Calculate the sum of the two numbers
+    const result = parseFloat(number1) + parseFloat(number2);
 
-    res.status(200).json({ result, statusCode: 200 });
+    try {
+        // Store the addition result in the database
+        await storeAddition(number1, number2, result);
+        // Respond with the result only
+        res.status(200).json({ result, statusCode: 200 });
+    } catch (error) {
+        console.error('Error storing addition:', error); // Log the error if any
+        res.status(500).send('Error saving addition'); // Return an error response
+    }
 });
 
-router.get('/additions', (req, res) => {
-    res.status(200).json({ data: pastAdditions });
+// Route to retrieve all past additions from the database
+router.get('/additions', async (req, res) => {
+    try {
+        // Retrieve all additions from the database
+        const additions = await getAdditions();
+        // Respond with the retrieved additions
+        res.status(200).json({ data: additions });
+    } catch (error) {
+        console.error('Error retrieving additions:', error); // Log the error if any
+        res.status(500).send('Error retrieving additions'); // Return an error response
+    }
 });
 
-module.exports = router;
+module.exports = router; // Export the router to use in the server setup
