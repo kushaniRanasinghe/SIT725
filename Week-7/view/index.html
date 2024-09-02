@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Calculator: Addition Made Simple</title>
+    <!-- Import Materialize CSS for styling -->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+    <!-- Import Google Icons for using Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Link to custom CSS file -->
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <!-- Set the viewport to ensure the site is responsive on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav>
+        <div class="nav-wrapper">
+            <!-- Brand logo/title with increased font size -->
+            <a href="#" class="brand-logo" style="font-size: 2em">Basic Calculator: Addition Made Simple</a>
+            <!-- Navigation links aligned to the right -->
+            <ul id="nav-mobile" class="right">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main container for content -->
+    <div class="container">
+        <!-- Row for the image, centered in the container -->
+        <div class="row center-align">
+            <!-- Responsive image with a fixed width and auto height -->
+            <img src="images/mathematics.jpg" alt="Maths Image" class="responsive-img" style="width: 40%; height: auto;">
+        </div>
+        
+        <!-- Header for the addition form -->
+        <h2 class="center-align">Add Two Numbers</h2>
+
+        <!-- Form for inputting the two numbers -->
+        <div class="row">
+            <form id="additionForm" class="col s12">
+                <div class="row">
+                    <!-- Input field for the first number -->
+                    <div class="input-field col s6">
+                        <input id="number1" type="number" class="validate" required>
+                        <label for="number1">Number 1</label>
+                    </div>
+                    <!-- Input field for the second number -->
+                    <div class="input-field col s6">
+                        <input id="number2" type="number" class="validate" required>
+                        <label for="number2">Number 2</label>
+                    </div>
+                </div>
+                <!-- Button to submit the form and perform the addition -->
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <button type="submit" class="btn waves-effect waves-light">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Section to display the result of the addition -->
+        <div class="row">
+            <div class="col s12 center-align">
+                <h5 id="result"></h5>
+            </div>
+        </div>
+
+        <!-- Section to display the list of past additions -->
+        <div class="row">
+            <div class="col s12 center-align">
+                <h4>Past Additions</h4>
+                <!-- List of past additions will be dynamically populated here -->
+                <ul id="additionsList" class="collection"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript files are included at the end for better page load performance -->
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Materialize JavaScript for component functionality -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Custom JavaScript file for handling form submission and data display -->
+    <script type="text/javascript" src="js/scripts.js"></script>
+    <!-- Include the Socket.IO client library for real-time communication -->
+    <script src="/socket.io/socket.io.js"></script>
+</body>
+</html>
